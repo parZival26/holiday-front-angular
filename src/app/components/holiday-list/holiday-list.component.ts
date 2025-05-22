@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HolidayService } from '../../services/holiday.service';
-import { Holiday } from '../../models/holiday.model';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faPenToSquare,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
+import { HolidayWithDate } from '../../models/holiday-with-date.model';
 
 @Component({
   selector: 'app-holiday-list',
@@ -15,14 +19,14 @@ import { faPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icon
     FontAwesomeModule
   ],
   templateUrl: './holiday-list.component.html',
-  styleUrls: ['./holiday-list.component.scss']
+  styleUrls: ['./holiday-list.component.scss'],
 })
 export class HolidayListComponent implements OnInit {
   faPlus = faPlus;
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
 
-  holidays: Holiday[] = [];
+  holidays: HolidayWithDate[] = [];
   loading = true;
   error = '';
   showModal = false;
@@ -43,7 +47,7 @@ export class HolidayListComponent implements OnInit {
         this.error = 'Error al cargar los festivos';
         this.loading = false;
         console.error('Error:', error);
-      }
+      },
     });
   }
 
@@ -51,12 +55,12 @@ export class HolidayListComponent implements OnInit {
     if (confirm('¿Estás seguro de que deseas eliminar este festivo?')) {
       this.holidayService.deleteHoliday(id).subscribe({
         next: () => {
-          this.holidays = this.holidays.filter(h => h.id !== id);
+          this.holidays = this.holidays.filter((h) => h.id !== id);
         },
         error: (error) => {
           this.error = 'Error al eliminar el festivo';
           console.error('Error:', error);
-        }
+        },
       });
     }
   }

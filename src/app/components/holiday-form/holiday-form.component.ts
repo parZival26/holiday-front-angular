@@ -1,6 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HolidayService } from '../../services/holiday.service';
 import { Holiday } from '../../models/holiday.model';
@@ -10,7 +15,7 @@ import { Holiday } from '../../models/holiday.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './holiday-form.component.html',
-  styleUrls: ['./holiday-form.component.scss']
+  styleUrls: ['./holiday-form.component.scss'],
 })
 export class HolidayFormComponent implements OnInit {
   @Output() saved = new EventEmitter<void>();
@@ -27,11 +32,13 @@ export class HolidayFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.holidayForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      date: ['', Validators.required],
-      description: [''],
-      type: ['', Validators.required],
-      isActive: [true]
+      paisId: [null, Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      dia: [null, [Validators.required, Validators.min(1), Validators.max(31)]],
+      mes: [null, [Validators.required, Validators.min(1), Validators.max(12)]],
+      diasPascua: [0],
+      tipoId: [null, Validators.required],
+      isActive: [true],
     });
   }
 
@@ -55,7 +62,7 @@ export class HolidayFormComponent implements OnInit {
           this.error = 'Error al cargar el festivo';
           this.loading = false;
           console.error('Error:', error);
-        }
+        },
       });
     }
   }
@@ -65,9 +72,10 @@ export class HolidayFormComponent implements OnInit {
       this.loading = true;
       const holiday: Holiday = this.holidayForm.value;
 
-      const request = this.isEditMode && this.holidayId
-        ? this.holidayService.updateHoliday(this.holidayId, holiday)
-        : this.holidayService.createHoliday(holiday);
+      const request =
+        this.isEditMode && this.holidayId
+          ? this.holidayService.updateHoliday(this.holidayId, holiday)
+          : this.holidayService.createHoliday(holiday);
 
       request.subscribe({
         next: () => {
@@ -77,7 +85,7 @@ export class HolidayFormComponent implements OnInit {
           this.error = 'Error al guardar el festivo';
           this.loading = false;
           console.error('Error:', error);
-        }
+        },
       });
     }
   }
