@@ -17,6 +17,7 @@ export class HolidayService {
       catchError(this.handleError<Holiday[]>('getHolidays', []))
     );
   }
+  
 
   getHolidayById(id: number): Observable<Holiday> {
     return this.http.get<Holiday>(`${this.apiUrl}/${id}`).pipe(

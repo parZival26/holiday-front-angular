@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HolidayService } from '../../services/holiday.service';
-import { Holiday } from '../../models/holiday.interface';
+import { Holiday } from '../../models/holiday.model';
 
 @Component({
   selector: 'app-holiday-form',
@@ -46,7 +46,7 @@ export class HolidayFormComponent implements OnInit {
   loadHoliday(): void {
     if (this.holidayId) {
       this.loading = true;
-      this.holidayService.getHoliday(this.holidayId).subscribe({
+      this.holidayService.getHolidayById(this.holidayId).subscribe({
         next: (holiday) => {
           this.holidayForm.patchValue(holiday);
           this.loading = false;

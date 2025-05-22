@@ -1,8 +1,8 @@
 export interface Holiday {
-  id: number;
+  id?: number;  
   name: string;
   date: string;
-  description: string;
+  description?: string;
   type: string;
   isActive: boolean;
-} 
+}

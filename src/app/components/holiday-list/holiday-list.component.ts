@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HolidayService } from '../../services/holiday.service';
-import { Holiday } from '../../models/holiday.interface';
+import { Holiday } from '../../models/holiday.model';
 import { RouterLink } from '@angular/router';
 import { HolidayFormComponent } from '../holiday-form/holiday-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
