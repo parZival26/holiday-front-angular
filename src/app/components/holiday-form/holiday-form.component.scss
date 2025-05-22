@@ -1,0 +1,165 @@
+.container {
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f7faff; 
+
+}
+
+.formulario {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+
+
+  h1 {
+    margin: 0;
+    color: #333;
+  }
+}
+
+.form {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    &.error {
+      border-color: #dc3545;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  label {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: #ecf4fe;
+  border-color: #265aa8;
+  color: #265aa8;
+
+  &:hover {
+    background-color: #82b1f8;
+  }
+
+  &:disabled {
+    background-color: #bfbfbf;
+    border-color: #545454;
+    color: #545454;
+    cursor: not-allowed;
+  }
+}
+
+.btn-secondary {
+  background-color: #ebebeb;
+  border-color: #545454;
+  color: #545454;
+
+  &:hover {
+    background-color: #959595;
+  }
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.error {
+  color: #dc3545;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .form {
+    padding: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}

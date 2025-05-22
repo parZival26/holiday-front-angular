@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="formulario">
+    <div class="header">
+      <h1>{{ isEditMode ? 'Editar Festivo' : 'Nuevo Festivo' }}</h1>
+      <button class="btn-primary" routerLink="/holidays">Volver</button>
+    </div>
+  
+    <div *ngIf="loading" class="loading">
+      Cargando...
+    </div>
+  
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+  
+    <form [formGroup]="holidayForm" (ngSubmit)="onSubmit()" class="form" *ngIf="!loading">
+      <div class="form-group">
+        <label for="name">Nombre *</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          [class.error]="holidayForm.get('name')?.invalid && holidayForm.get('name')?.touched"
+        >
+        <div class="error-message" *ngIf="holidayForm.get('name')?.invalid && holidayForm.get('name')?.touched">
+          El nombre es requerido y debe tener al menos 3 caracteres
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="date">Fecha *</label>
+        <input
+          type="date"
+          id="date"
+          formControlName="date"
+          [class.error]="holidayForm.get('date')?.invalid && holidayForm.get('date')?.touched"
+        >
+        <div class="error-message" *ngIf="holidayForm.get('date')?.invalid && holidayForm.get('date')?.touched">
+          La fecha es requerida
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="type">Tipo *</label>
+        <select
+          id="type"
+          formControlName="type"
+          [class.error]="holidayForm.get('type')?.invalid && holidayForm.get('type')?.touched"
+        >
+          <option value="">Seleccione un tipo</option>
+          <option value="NACIONAL">Nacional</option>
+          <option value="REGIONAL">Regional</option>
+          <option value="LOCAL">Local</option>
+        </select>
+        <div class="error-message" *ngIf="holidayForm.get('type')?.invalid && holidayForm.get('type')?.touched">
+          El tipo es requerido
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="4"
+        ></textarea>
+      </div>
+  
+      <div class="form-group checkbox">
+        <label>
+          <input type="checkbox" formControlName="isActive">
+          Activo
+        </label>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="holidayForm.invalid || loading">
+          {{ isEditMode ? 'Actualizar' : 'Crear' }}
+        </button>
+        <button type="button" class="btn-secondary" routerLink="/holidays">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
