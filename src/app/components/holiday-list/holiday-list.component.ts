@@ -8,7 +8,7 @@ import {
   faPenToSquare,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { HolidayWithDate } from '../../models/holiday-with-date.model';
+import { Holiday } from '../../models/holiday.model';
 
 @Component({
   selector: 'app-holiday-list',
@@ -26,9 +26,9 @@ export class HolidayListComponent implements OnInit {
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
 
-  holidays: HolidayWithDate[] = [];
+  holidays: Holiday[] = [];
   loading = true;
-  error = '';
+  error: string | null = null;
   showModal = false;
 
   constructor(private holidayService: HolidayService) {}
@@ -38,30 +38,28 @@ export class HolidayListComponent implements OnInit {
   }
 
   loadHolidays(): void {
-    this.holidayService.getHolidays().subscribe({
-      next: (data) => {
+    this.holidayService.getHolidays().subscribe(
+      (data) => {
         this.holidays = data;
         this.loading = false;
       },
-      error: (error) => {
+      (error) => {
         this.error = 'Error al cargar los festivos';
         this.loading = false;
-        console.error('Error:', error);
-      },
-    });
+      }
+    );
   }
 
   deleteHoliday(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar este festivo?')) {
-      this.holidayService.deleteHoliday(id).subscribe({
-        next: () => {
-          this.holidays = this.holidays.filter((h) => h.id !== id);
+      this.holidayService.deleteHoliday(id).subscribe(
+        () => {
+          this.holidays = this.holidays.filter(holiday => holiday.paisId !== id);
         },
-        error: (error) => {
+        (error) => {
           this.error = 'Error al eliminar el festivo';
-          console.error('Error:', error);
-        },
-      });
+        }
+      );
     }
   }
 
