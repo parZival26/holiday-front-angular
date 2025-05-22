@@ -6,9 +6,7 @@
     </button>
   </div>
 
-  <div *ngIf="loading" class="loading">
-    Cargando festivos...
-  </div>
+  <div *ngIf="loading" class="loading">Cargando festivos...</div>
 
   <div *ngIf="error" class="error">
     {{ error }}
@@ -17,16 +15,16 @@
   <div *ngIf="!loading && !error" class="holiday-grid">
     <div *ngFor="let holiday of holidays" class="holiday-card">
       <div class="holiday-header">
-        <h2>{{ holiday.name }}</h2>
-        <span class="status-indicator" [class.active]="holiday.isActive" [title]="holiday.isActive ? 'Activo' : 'Inactivo'"></span>
+        <h2>{{ holiday.nombre }}</h2>
       </div>
       <div class="holiday-body">
-        <p><strong>Fecha:</strong> {{ holiday.date | date:'longDate' }}</p>
-        <p><strong>Tipo:</strong> {{ holiday.type }}</p>
-        <p *ngIf="holiday.description"><strong>Descripción:</strong> {{ holiday.description }}</p>
+        <p><strong>Fecha:</strong> {{ holiday.fecha | date : "longDate" }}</p>
       </div>
       <div class="holiday-actions">
-        <button class="btn-edit" [routerLink]="['/holidays', holiday.id, 'edit']">
+        <button
+          class="btn-edit"
+          [routerLink]="['/holidays', holiday.id, 'edit']"
+        >
           <fa-icon [icon]="faPenToSquare" class="my-icon"></fa-icon>Editar
         </button>
         <button class="btn-delete" (click)="deleteHoliday(holiday.id!)">
