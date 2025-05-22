@@ -15,9 +15,7 @@ export class HolidayService {
 
   getHolidays(): Observable<HolidayWithDate[]> {
     const holidays = this.http
-      .get<HolidayWithDate[]>(
-        'https://szcxpzk5-8080.use2.devtunnels.ms/api/festivos/1/2025'
-      )
+      .get<HolidayWithDate[]>('http://localhost:8080/api/festivos/1/2025')
       .pipe(catchError(this.handleError<HolidayWithDate[]>('getHolidays', [])));
 
     console.log(holidays);
