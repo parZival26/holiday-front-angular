@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HolidayService } from '../../services/holiday.service';
 import { Holiday } from '../../models/holiday.model';
 import { RouterLink } from '@angular/router';
-import { HolidayFormComponent } from '../holiday-form/holiday-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,7 +12,6 @@ import { faPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icon
   imports: [
     CommonModule,
     RouterLink,
-    HolidayFormComponent,
     FontAwesomeModule
   ],
   templateUrl: './holiday-list.component.html',
