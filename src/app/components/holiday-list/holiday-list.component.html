@@ -15,15 +15,33 @@
   <div *ngIf="!loading && !error" class="holiday-grid">
     <div class="holiday-card" *ngFor="let holiday of holidays">
       <h3>{{ holiday.nombre }}</h3>
-      <p>País ID: {{ holiday.paisId }}</p>
-      <p>Día: {{ holiday.dia }}</p>
-      <p>Mes: {{ holiday.mes }}</p>
-      <p>Días Pascua: {{ holiday.diasPascua }}</p>
-      <p>Tipo ID: {{ holiday.tipoId }}</p>
-      <div class="actions">
-        <button class="btn-primary" [routerLink]="['/holidays', holiday.paisId]">Ver Detalles</button>
-        <button class="btn-secondary" [routerLink]="['/holidays', holiday.paisId, 'edit']">Editar</button>
-        <button class="btn-danger" (click)="deleteHoliday(holiday.paisId)">Eliminar</button>
+      <div>
+        <p>País ID: {{ holiday.paisId }}</p>
+        <p>Día: {{ holiday.dia }}</p>
+        <p>Mes: {{ holiday.mes }}</p>
+        <p>Días Pascua: {{ holiday.diasPascua }}</p>
+        <p>Tipo ID: {{ holiday.tipoId }}</p>
+      </div>
+
+      <div class="holiday-actions">
+        <!--<button
+          class="btn-primary"
+          [routerLink]="['/holidays', holiday.paisId]"
+        >
+          Ver Detalles
+        </button>-->
+        <button
+          class="btn-editar"
+          [routerLink]="['/holidays', holiday.paisId, 'edit']"
+        >
+          <fa-icon [icon]="faPenToSquare" class="my-icon"></fa-icon>
+          Editar
+        </button>
+        <button class="btn-delete" (click)="deleteHoliday(holiday.paisId)">
+          <fa-icon [icon]="faTrash" class="my-icon"></fa-icon>
+
+          Eliminar
+        </button>
       </div>
     </div>
   </div>

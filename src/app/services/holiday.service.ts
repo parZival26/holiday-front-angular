@@ -4,18 +4,19 @@ import { Observable, of } from 'rxjs';
 import { Holiday } from '../models/holiday.model';
 import { catchError, map } from 'rxjs/operators';
 import { HolidayWithDate } from '../models/holiday-with-date.model';
+import { envs } from '../../config/envs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HolidayService {
-  private apiUrl = 'http://localhost:8080/api/festivos';
+  private apiUrl = `${envs.API_URL}/api/festivos`;
 
   constructor(private http: HttpClient) {}
 
   getHolidays(): Observable<HolidayWithDate[]> {
     const holidays = this.http
-      .get<HolidayWithDate[]>('http://localhost:8080/api/festivos/1/2025')
+      .get<HolidayWithDate[]>(`${this.apiUrl}/1/2025`)
       .pipe(catchError(this.handleError<HolidayWithDate[]>('getHolidays', [])));
 
     console.log(holidays);
