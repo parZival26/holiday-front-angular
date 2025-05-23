@@ -1,6 +1,6 @@
 .container {
   padding: 2rem;
-  background-color: #f7faff; 
+  background-color: #efefef; 
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -17,6 +17,13 @@
   }
 }
 
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 0.8rem 0;
+}
+
 .btn-primary {
   padding: 0.75rem 1.5rem;
   border: 1px solid;
@@ -29,7 +36,8 @@
   color: #265aa8;
 
   &:hover {
-    background-color: #82b1f8;
+    background-color: #265aa8;
+    color: #fff;
   }
 }
 
@@ -72,6 +80,12 @@
   }
 }
 
+.holiday-card p {
+  margin: 0.5rem 0;
+  color: #555;
+  font-size: 1rem;
+}
+
 .holiday-header {
   display: flex;
   justify-content: space-between;
@@ -112,10 +126,12 @@
   display: flex;
   gap: 1rem;
   margin-top: auto;
+
+
   
 button {
     flex: 1;
-    padding: 0.5rem;
+    padding: 0.3rem;
     border-radius: 6px;
     border: 1px solid;
     cursor: pointer;
@@ -130,18 +146,18 @@ button {
     color: #265aa8;
 
     &:hover {
-      background-color: #5f97ec;
+      background-color: #265aa8;
       color: #fff;
     }
 }
 
   .btn-delete {
-    background-color: #fdf5f5;
+    background-color: #f8e3e3;
     border-color: #da3939;
     color: #da3939;
 
     &:hover {
-      background-color: #e57373;
+      background-color: #da5454;
       color: #fff;
     }
   }

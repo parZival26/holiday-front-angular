@@ -15,7 +15,8 @@
   <div *ngIf="!loading && !error" class="holiday-grid">
     <div class="holiday-card" *ngFor="let holiday of holidays">
       <h3>{{ holiday.nombre }}</h3>
-      <div>
+      <hr />
+      <div class="holiday-details">
         <p>País ID: {{ holiday.paisId }}</p>
         <p>Día: {{ holiday.dia }}</p>
         <p>Mes: {{ holiday.mes }}</p>
