@@ -17,17 +17,17 @@
       <h3>{{ holiday.nombre }}</h3>
       <hr />
       <div class="holiday-details">
-        <p>País ID: {{ holiday.pais }}</p>
+        <p>País: {{ holiday.pais.nombre }}</p>
         <p>Día: {{ holiday.dia }}</p>
         <p>Mes: {{ holiday.mes }}</p>
         <p>Días Pascua: {{ holiday.diasPascua }}</p>
-        <p>Tipo ID: {{ holiday.tipo }}</p>
+        <p>Tipo: {{ holiday.tipo.nombre }}</p>
       </div>
 
       <div class="holiday-actions">
         <button
           class="btn-editar"
-          [routerLink]="['/holidays', holiday.pais, 'edit']"
+          [routerLink]="['/holidays', holiday.id, 'edit']"
         >
           <fa-icon [icon]="faPenToSquare" class="my-icon"></fa-icon>
           Editar

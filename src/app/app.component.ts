@@ -5,17 +5,9 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  template: `
-    <router-outlet></router-outlet>
-  `,
-  styles: [`
-    :host {
-      display: block;
-      min-height: 100vh;
-      background-color: #f5f5f5;
-    }
-  `]
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'holiday-frontend';
+  title = 'holiday-front-angular';
 }
