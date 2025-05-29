@@ -34,6 +34,7 @@ hr {
   background-color: #ecf4fe;
   border-color: #265aa8;
   color: #265aa8;
+  text-decoration: none;
 
   &:hover {
     background-color: #265aa8;
@@ -122,25 +123,25 @@ hr {
   }
 }
 
+
 .holiday-actions {
   display: flex;
   gap: 1rem;
   margin-top: auto;
 
-
-  
-button {
+.btn-editar {
     flex: 1;
-    padding: 0.3rem;
+    padding: 0.4rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
     border-radius: 6px;
     border: 1px solid;
     cursor: pointer;
     font-size: 0.875rem;
     transition: background-color 0.3s;
     margin-top: 10px;
-  }
-
-.btn-editar {
+    text-decoration: none;
     background-color: #ecf4fe;
     border-color: #265aa8;
     color: #265aa8;
@@ -152,6 +153,15 @@ button {
 }
 
   .btn-delete {
+    flex: 1;
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    text-decoration: none;
     background-color: #f8e3e3;
     border-color: #da3939;
     color: #da3939;

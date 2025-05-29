@@ -1,9 +1,9 @@
 <div class="container">
   <div class="header">
     <h1>Festivos</h1>
-    <button class="btn-primary" routerLink="/holidays/new">
+    <a class="btn-primary" [routerLink]="'/holidays/new'">
       <fa-icon [icon]="faPlus" class="my-icon"></fa-icon> Nuevo Festivo
-    </button>
+    </a>    
   </div>
 
   <div *ngIf="loading" class="loading">Cargando festivos...</div>
@@ -25,16 +25,15 @@
       </div>
 
       <div class="holiday-actions">
-        <button
+        <a
           class="btn-editar"
-          [routerLink]="['/holidays', holiday.pais, 'edit']"
+          [routerLink]="['/holidays', holiday.id, 'edit']"
         >
           <fa-icon [icon]="faPenToSquare" class="my-icon"></fa-icon>
           Editar
-        </button>
+        </a>
         <button class="btn-delete" (click)="deleteHoliday(holiday.id)">
           <fa-icon [icon]="faTrash" class="my-icon"></fa-icon>
-
           Eliminar
         </button>
       </div>
