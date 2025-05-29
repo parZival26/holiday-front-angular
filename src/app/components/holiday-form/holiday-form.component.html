@@ -49,15 +49,12 @@
         </select>
       </div>
 
-      <div class="form-group checkbox">
-        <label>
-          <input type="checkbox" formControlName="isActive" />
-          Activo
-        </label>
-      </div>
-
       <div class="form-actions">
-        <button type="submit" class="btn-primary" [disabled]="holidayForm.invalid || loading">
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="holidayForm.invalid || loading"
+        >
           {{ isEditMode ? "Actualizar" : "Crear" }}
         </button>
         <a routerLink="/holidays" class="btn-secondary">Cancelar</a>

@@ -37,6 +37,7 @@ export interface SearchFestivoDTO {
 export interface FestivoDto {
   fecha: string;
   nombre: string;
+  tipo: Tipo;
 }
 
 export interface VerificarFestivoRequest {
