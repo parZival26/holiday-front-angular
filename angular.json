@@ -78,8 +78,7 @@
               "buildTarget": "holiday-frontend:build:production"
             },
             "development": {
-              "buildTarget": "holiday-frontend:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "buildTarget": "holiday-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
