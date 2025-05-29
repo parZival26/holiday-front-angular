@@ -10,6 +10,13 @@
   align-items: center;
   margin-bottom: 2rem;
 
+.header-actions {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
   h1 {
     margin: 0;
     color: #3a3a3a;

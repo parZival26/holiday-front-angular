@@ -1,9 +1,14 @@
 <div class="container">
   <div class="header">
     <h1>Festivos</h1>
-    <a class="btn-primary" [routerLink]="'/holidays/new'">
-      <fa-icon [icon]="faPlus" class="my-icon"></fa-icon> Nuevo Festivo
-    </a>    
+      <div class="header-actions">
+        <a class="btn-primary" [routerLink]="'/holidays/list-year-country-year'">
+          <fa-icon [icon]="faPlus" class="my-icon"></fa-icon> Buscar festivos
+        </a>   
+        <a class="btn-primary" [routerLink]="'/holidays/new'">
+          <fa-icon [icon]="faPlus" class="my-icon"></fa-icon> Nuevo Festivo
+        </a>   
+      </div>
   </div>
 
   <div *ngIf="loading" class="loading">Cargando festivos...</div>
