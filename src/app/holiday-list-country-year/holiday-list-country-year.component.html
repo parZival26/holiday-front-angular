@@ -1,0 +1,132 @@
+<div class="container">
+  <div class="header">
+    <h1>
+      <i class="my-icon">🎉</i>
+      Festivos por País y Año
+    </h1>
+  </div>
+
+  <hr />
+
+  <!-- Debug info -->
+  <div
+    style="
+      background: #f0f0f0;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    "
+  >
+    <small>
+      Debug: selectedCountryId = {{ selectedCountryId }}, selectedYear =
+      {{ selectedYear }}, countries.length = {{ countries.length }},
+      isButtonDisabled = {{ isButtonDisabled() }}
+    </small>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <div class="filter-group">
+      <label for="country-select">País:</label>
+      <select
+        id="country-select"
+        name="countrySelect"
+        [(ngModel)]="selectedCountryId"
+        (change)="onCountryChange()"
+        (ngModelChange)="onCountryChange()"
+        class="form-select"
+      >
+        <option value="">Selecciona un país</option>
+        <option *ngFor="let country of countries" [value]="country.id">
+          {{ country.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="year-select">Año:</label>
+      <select
+        id="year-select"
+        name="yearSelect"
+        [(ngModel)]="selectedYear"
+        (change)="onYearChange()"
+        (ngModelChange)="onYearChange()"
+        class="form-select"
+      >
+        <option *ngFor="let year of availableYears" [value]="year">
+          {{ year }}
+        </option>
+      </select>
+    </div>
+
+    <button
+      class="btn-primary"
+      (click)="onSearch()"
+      [disabled]="isButtonDisabled()"
+    >
+      <i class="my-icon">🔍</i>
+      Buscar Festivos
+    </button>
+  </div>
+
+  <hr />
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading">
+    <i class="my-icon">⏳</i>
+    Cargando...
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error && !loading" class="error">
+    <i class="my-icon">❌</i>
+    {{ error }}
+  </div>
+
+  <!-- Results header -->
+  <div *ngIf="holidays.length > 0 && !loading" class="results-header">
+    <h2>
+      Festivos de {{ getSelectedCountryName() }} - {{ selectedYear }}
+      <span class="results-count">({{ holidays.length }} festivos)</span>
+    </h2>
+  </div>
+
+  <!-- Holiday grid -->
+  <div *ngIf="holidays.length > 0 && !loading" class="holiday-grid">
+    <div *ngFor="let holiday of holidays" class="holiday-card">
+      <div class="holiday-header">
+        <h3>{{ holiday.nombre }}</h3>
+        <div class="status-indicator active"></div>
+      </div>
+
+      <div class="holiday-body">
+        <p>
+          <strong>Fecha:</strong> {{ holiday.fecha | date : "fullDate" : "es" }}
+        </p>
+        <p>
+          <strong>Día:</strong>
+          {{ holiday.fecha | date : "EEEE" : "es" | titlecase }}
+        </p>
+        <p><strong>Tipo:</strong> {{ holiday.tipo.nombre }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state when no holidays found -->
+  <div
+    *ngIf="
+      holidays.length === 0 &&
+      !loading &&
+      !error &&
+      selectedCountryId &&
+      selectedYear
+    "
+    class="empty-state"
+  >
+    <i class="my-icon">📅</i>
+    <p>
+      No hay festivos registrados para {{ getSelectedCountryName() }} en el año
+      {{ selectedYear }}
+    </p>
+  </div>
+</div>
