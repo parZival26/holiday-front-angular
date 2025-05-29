@@ -24,6 +24,28 @@ hr {
   margin: 0.8rem 0;
 }
 
+.btn-secondary {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid;
+}
+
+.btn-secondary {
+  background-color: #ecf4fe;
+  border-color: #265aa8;
+  color: #265aa8;
+
+  &:hover {
+    background-color: #265aa8;
+    color: #fff;
+  }
+}
+
 .filters {
   display: flex;
   gap: 1.5rem;

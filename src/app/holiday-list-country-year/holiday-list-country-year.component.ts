@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { HolidayService } from '../services/holiday.service';
 import { CountryService } from '../services/country.service';
 import { FestivoDto } from '../models/holiday.model';
@@ -9,7 +10,7 @@ import { Pais } from '../models/country.model';
 @Component({
   selector: 'app-holiday-list-country-year',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './holiday-list-country-year.component.html',
   styleUrl: './holiday-list-country-year.component.scss',
 })
