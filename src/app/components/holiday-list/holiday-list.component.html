@@ -17,28 +17,22 @@
       <h3>{{ holiday.nombre }}</h3>
       <hr />
       <div class="holiday-details">
-        <p>País ID: {{ holiday.paisId }}</p>
+        <p>País ID: {{ holiday.pais }}</p>
         <p>Día: {{ holiday.dia }}</p>
         <p>Mes: {{ holiday.mes }}</p>
         <p>Días Pascua: {{ holiday.diasPascua }}</p>
-        <p>Tipo ID: {{ holiday.tipoId }}</p>
+        <p>Tipo ID: {{ holiday.tipo }}</p>
       </div>
 
       <div class="holiday-actions">
-        <!--<button
-          class="btn-primary"
-          [routerLink]="['/holidays', holiday.paisId]"
-        >
-          Ver Detalles
-        </button>-->
         <button
           class="btn-editar"
-          [routerLink]="['/holidays', holiday.paisId, 'edit']"
+          [routerLink]="['/holidays', holiday.pais, 'edit']"
         >
           <fa-icon [icon]="faPenToSquare" class="my-icon"></fa-icon>
           Editar
         </button>
-        <button class="btn-delete" (click)="deleteHoliday(holiday.paisId)">
+        <button class="btn-delete" (click)="deleteHoliday(holiday.id)">
           <fa-icon [icon]="faTrash" class="my-icon"></fa-icon>
 
           Eliminar

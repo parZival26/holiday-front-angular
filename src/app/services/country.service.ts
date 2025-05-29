@@ -3,9 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {
-  Country,
-  CreateCountryDTO,
-  UpdateCountryDTO,
+  Pais,
+  CreatePaisDTO,
+  UpdatePaisDTO,
 } from '../models/country.model';
 import { envs } from '../../config/envs';
 
@@ -13,61 +13,72 @@ import { envs } from '../../config/envs';
   providedIn: 'root',
 })
 export class CountryService {
-  private apiUrl = `${envs.API_URL}/api/pais`;
+  private apiUrl = `${envs.API_URL}/api/paises`;
 
   constructor(private http: HttpClient) {}
 
   /**
-   * Get all countries
+   * Get all countries (listar)
    * @returns Observable with list of countries
    */
-  getCountries(): Observable<Country[]> {
+  listar(): Observable<Pais[]> {
     return this.http
-      .get<Country[]>(this.apiUrl)
+      .get<Pais[]>(`${this.apiUrl}/listar`)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Get a country by its ID
+   * Get a country by its ID (obtener)
    * @param id Country ID
    * @returns Observable with the country data
    */
-  getCountryById(id: number): Observable<Country> {
+  obtener(id: number): Observable<Pais> {
     return this.http
-      .get<Country>(`${this.apiUrl}/${id}`)
+      .get<Pais>(`${this.apiUrl}/obtener/${id}`)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Create a new country
-   * @param country Country data to create
+   * Search countries by name (buscar)
+   * @param nombre Country name to search
+   * @returns Observable with list of matching countries
+   */
+  buscar(nombre: string): Observable<Pais[]> {
+    return this.http
+      .get<Pais[]>(`${this.apiUrl}/buscar/${nombre}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Create a new country (agregar)
+   * @param pais Country data to create
    * @returns Observable with the created country
    */
-  createCountry(country: CreateCountryDTO): Observable<Country> {
+  agregar(pais: CreatePaisDTO): Observable<Pais> {
     return this.http
-      .post<Country>(this.apiUrl, country)
+      .post<Pais>(`${this.apiUrl}/agregar`, pais)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Update an existing country
-   * @param country Country data to update
+   * Update an existing country (modificar)
+   * @param pais Country data to update
    * @returns Observable with the updated country
    */
-  updateCountry(country: UpdateCountryDTO): Observable<Country> {
+  modificar(pais: UpdatePaisDTO): Observable<Pais> {
     return this.http
-      .patch<Country>(this.apiUrl, country)
+      .put<Pais>(`${this.apiUrl}/modificar`, pais)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Delete a country by its ID
+   * Delete a country by its ID (eliminar)
    * @param id Country ID to delete
-   * @returns Observable with success message
+   * @returns Observable with boolean result
    */
-  deleteCountry(id: number): Observable<string> {
+  eliminar(id: number): Observable<boolean> {
     return this.http
-      .delete<string>(`${this.apiUrl}/${id}`)
+      .delete<boolean>(`${this.apiUrl}/eliminar/${id}`)
       .pipe(catchError(this.handleError));
   }
 

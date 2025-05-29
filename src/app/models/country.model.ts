@@ -1,13 +1,17 @@
-export interface Country {
+export interface Pais {
   id: number;
   nombre: string;
 }
 
-export interface CreateCountryDTO {
+export interface CreatePaisDTO {
   nombre: string;
 }
 
-export interface UpdateCountryDTO {
+export interface UpdatePaisDTO {
   id: number;
+  nombre: string;
+}
+
+export interface SearchPaisDTO {
   nombre: string;
 }

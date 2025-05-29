@@ -2,68 +2,83 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Type, CreateTypeDTO, UpdateTypeDTO } from '../models/type.model';
+import {
+  Tipo,
+  CreateTipoDTO,
+  UpdateTipoDTO,
+} from '../models/type.model';
 import { envs } from '../../config/envs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TypeService {
-  private apiUrl = `${envs.API_URL}/api/tipo`;
+  private apiUrl = `${envs.API_URL}/api/tipos`;
 
   constructor(private http: HttpClient) {}
 
   /**
-   * Get all types
+   * Get all types (listar)
    * @returns Observable with list of types
    */
-  getTypes(): Observable<Type[]> {
+  listar(): Observable<Tipo[]> {
     return this.http
-      .get<Type[]>(this.apiUrl)
+      .get<Tipo[]>(`${this.apiUrl}/listar`)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Get a type by its ID
+   * Get a type by its ID (obtener)
    * @param id Type ID
    * @returns Observable with the type data
    */
-  getTypeById(id: number): Observable<Type> {
+  obtener(id: number): Observable<Tipo> {
     return this.http
-      .get<Type>(`${this.apiUrl}/${id}`)
+      .get<Tipo>(`${this.apiUrl}/obtener/${id}`)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Create a new type
-   * @param type Type data to create
+   * Search types by name (buscar)
+   * @param nombre Type name to search
+   * @returns Observable with list of matching types
+   */
+  buscar(nombre: string): Observable<Tipo[]> {
+    return this.http
+      .get<Tipo[]>(`${this.apiUrl}/buscar/${nombre}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Create a new type (agregar)
+   * @param tipo Type data to create
    * @returns Observable with the created type
    */
-  createType(type: CreateTypeDTO): Observable<Type> {
+  agregar(tipo: CreateTipoDTO): Observable<Tipo> {
     return this.http
-      .post<Type>(this.apiUrl, type)
+      .post<Tipo>(`${this.apiUrl}/agregar`, tipo)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Update an existing type
-   * @param type Type data to update
+   * Update an existing type (modificar)
+   * @param tipo Type data to update
    * @returns Observable with the updated type
    */
-  updateType(type: UpdateTypeDTO): Observable<Type> {
+  modificar(tipo: UpdateTipoDTO): Observable<Tipo> {
     return this.http
-      .patch<Type>(this.apiUrl, type)
+      .put<Tipo>(`${this.apiUrl}/modificar`, tipo)
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * Delete a type by its ID
+   * Delete a type by its ID (eliminar)
    * @param id Type ID to delete
-   * @returns Observable with success message
+   * @returns Observable with boolean result
    */
-  deleteType(id: number): Observable<string> {
+  eliminar(id: number): Observable<boolean> {
     return this.http
-      .delete<string>(`${this.apiUrl}/${id}`)
+      .delete<boolean>(`${this.apiUrl}/eliminar/${id}`)
       .pipe(catchError(this.handleError));
   }
 

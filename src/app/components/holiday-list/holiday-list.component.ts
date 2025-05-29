@@ -8,7 +8,7 @@ import {
   faPenToSquare,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { Holiday } from '../../models/holiday.model';
+import { Festivo } from '../../models/holiday.model';
 
 @Component({
   selector: 'app-holiday-list',
@@ -26,7 +26,7 @@ export class HolidayListComponent implements OnInit {
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
 
-  holidays: Holiday[] = [];
+  holidays: Festivo[] = [];
   loading = true;
   error: string | null = null;
   showModal = false;
@@ -38,7 +38,7 @@ export class HolidayListComponent implements OnInit {
   }
 
   loadHolidays(): void {
-    this.holidayService.getHolidays().subscribe(
+    this.holidayService.listar().subscribe(
       (data) => {
         this.holidays = data;
         this.loading = false;
@@ -52,9 +52,9 @@ export class HolidayListComponent implements OnInit {
 
   deleteHoliday(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar este festivo?')) {
-      this.holidayService.deleteHoliday(id).subscribe(
+      this.holidayService.eliminar(id).subscribe(
         () => {
-          this.holidays = this.holidays.filter(holiday => holiday.paisId !== id);
+          this.holidays = this.holidays.filter(holiday => holiday.id !== id);
         },
         (error) => {
           this.error = 'Error al eliminar el festivo';

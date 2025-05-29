@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HolidayService } from '../../services/holiday.service';
-import { Holiday } from '../../models/holiday.model';
+import { Festivo } from '../../models/holiday.model';
 
 @Component({
   selector: 'app-holiday-form',
@@ -53,7 +53,7 @@ export class HolidayFormComponent implements OnInit {
   loadHoliday(): void {
     if (this.holidayId) {
       this.loading = true;
-      this.holidayService.getHolidayById(this.holidayId).subscribe({
+      this.holidayService.obtener(this.holidayId).subscribe({
         next: (holiday) => {
           this.holidayForm.patchValue(holiday);
           this.loading = false;
@@ -67,15 +67,33 @@ export class HolidayFormComponent implements OnInit {
     }
   }
 
+  
   onSubmit(): void {
     if (this.holidayForm.valid) {
       this.loading = true;
-      const holiday: Holiday = this.holidayForm.value;
+      const holiday: Festivo = this.holidayForm.value;
+
+      const holidayId = this.holidayId;
 
       const request =
         this.isEditMode && this.holidayId
-          ? this.holidayService.updateHoliday(this.holidayId, holiday)
-          : this.holidayService.createHoliday(holiday);
+          ? this.holidayService.modificar({ 
+              id: this.holidayId,
+              paisId: holiday.pais.id,
+              tipoId: holiday.tipo.id,
+              nombre: holiday.nombre,
+              dia: holiday.dia,
+              mes: holiday.mes,
+              diasPascua: holiday.diasPascua
+            })
+          : this.holidayService.agregar({
+              paisId: holiday.pais.id,
+              tipoId: holiday.tipo.id,
+              nombre: holiday.nombre,
+              dia: holiday.dia,
+              mes: holiday.mes,
+              diasPascua: holiday.diasPascua
+            });
 
       request.subscribe({
         next: () => {

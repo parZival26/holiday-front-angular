@@ -1,13 +1,17 @@
-export interface Type {
+export interface Tipo {
   id: number;
-  tipo: string;
+  nombre: string;
 }
 
-export interface CreateTypeDTO {
-  tipo: string;
+export interface CreateTipoDTO {
+  nombre: string;
 }
 
-export interface UpdateTypeDTO {
+export interface UpdateTipoDTO {
   id: number;
-  tipo: string;
+  nombre: string;
+}
+
+export interface SearchTipoDTO {
+  nombre: string;
 }
