@@ -16,7 +16,10 @@
     >
       <div class="form-group">
         <label for="paisId">País *</label>
-        <input type="text" id="paisId" formControlName="paisId" />
+        <select id="paisId" formControlName="paisId">
+          <option [ngValue]="null" disabled>Seleccione un país</option>
+          <option *ngFor="let country of countries" [ngValue]="country.id">{{ country.nombre }}</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -42,10 +45,8 @@
       <div class="form-group">
         <label for="tipoId">Tipo de festivo *</label>
         <select id="tipoId" formControlName="tipoId">
-          <option [ngValue]="1">Fijo</option>
-          <option [ngValue]="2">Ley de Puente festivo</option>
-          <option [ngValue]="3">Basado en Pascua</option>
-          <option [ngValue]="4">Pascua + Puente festivo</option>
+          <option [ngValue]="null" disabled>Seleccione un tipo</option>
+          <option *ngFor="let type of types" [ngValue]="type.id">{{ type.nombre }}</option>
         </select>
       </div>
 
