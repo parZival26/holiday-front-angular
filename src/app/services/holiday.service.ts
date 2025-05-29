@@ -7,7 +7,7 @@ import {
   CreateFestivoDTO,
   UpdateFestivoDTO,
   FestivoDto,
-  VerificarFestivoRequest
+  VerificarFestivoRequest,
 } from '../models/holiday.model';
 import { envs } from '../../config/envs';
 
@@ -92,7 +92,12 @@ export class HolidayService {
    * @param dia Day
    * @returns Observable with boolean result
    */
-  verificar(idPais: number, año: number, mes: number, dia: number): Observable<boolean> {
+  verificar(
+    idPais: number,
+    año: number,
+    mes: number,
+    dia: number
+  ): Observable<boolean> {
     return this.http
       .get<boolean>(`${this.apiUrl}/verificar/${idPais}/${año}/${mes}/${dia}`)
       .pipe(catchError(this.handleError));
@@ -117,16 +122,34 @@ export class HolidayService {
    */
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred';
+    let errorType = 'ServerError';
 
-    if (error.error instanceof ErrorEvent) {
+    if (error.status === 0) {
+      // Network error or CORS issue
+      errorMessage = 'NetworkError: Cannot connect to server';
+      errorType = 'NetworkError';
+    } else if (
+      error.error &&
+      typeof error.error === 'object' &&
+      error.error.message
+    ) {
       // Client-side error
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `NetworkError: ${error.error.message}`;
+      errorType = 'NetworkError';
     } else {
       // Server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = `Server Error: ${error.status} - ${error.statusText}`;
+      errorType = 'ServerError';
     }
 
-    console.error(errorMessage);
-    return throwError(() => new Error(errorMessage));
+    console.error('HTTP Error:', errorMessage);
+    console.error('Full error:', error);
+
+    return throwError(() => ({
+      message: errorMessage,
+      status: error.status,
+      name: errorType,
+      originalError: error,
+    }));
   }
 }

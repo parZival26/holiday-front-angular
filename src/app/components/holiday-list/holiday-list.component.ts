@@ -13,11 +13,7 @@ import { Festivo } from '../../models/holiday.model';
 @Component({
   selector: 'app-holiday-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    FontAwesomeModule
-  ],
+  imports: [CommonModule, RouterLink, FontAwesomeModule],
   templateUrl: './holiday-list.component.html',
   styleUrls: ['./holiday-list.component.scss'],
 })
@@ -44,6 +40,8 @@ export class HolidayListComponent implements OnInit {
         this.loading = false;
       },
       (error) => {
+        console.log('Error al cargar los festivos:', error);
+
         this.error = 'Error al cargar los festivos';
         this.loading = false;
       }
@@ -54,7 +52,7 @@ export class HolidayListComponent implements OnInit {
     if (confirm('¿Estás seguro de que deseas eliminar este festivo?')) {
       this.holidayService.eliminar(id).subscribe(
         () => {
-          this.holidays = this.holidays.filter(holiday => holiday.id !== id);
+          this.holidays = this.holidays.filter((holiday) => holiday.id !== id);
         },
         (error) => {
           this.error = 'Error al eliminar el festivo';
